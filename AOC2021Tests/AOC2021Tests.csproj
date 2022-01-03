@@ -4,6 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <RootNamespace>AoC2021.Tests</RootNamespace>
+
+    <AssemblyName>AoC2021.Tests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Day01\Day01.csproj" />
     <ProjectReference Include="..\Day02\Day02.csproj" />
+    <ProjectReference Include="..\Day03\Day03.csproj" />
   </ItemGroup>
 
 </Project>

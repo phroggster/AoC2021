@@ -1,4 +1,5 @@
 using AoC2021.Day01;
+using System;
 using NUnit.Framework;
 
 namespace AoC2021.Tests
