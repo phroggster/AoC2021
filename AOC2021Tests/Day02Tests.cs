@@ -1,31 +1,21 @@
-﻿using AoC2021.Day02;
+using AoC2021.Day02;
 using NUnit.Framework;
 using System;
 
 namespace AoC2021.Tests
 {
-    public class Day02Tests
+  public class Day02Tests
+  {
+    [Test]
+    public void PartATest()
     {
-        static readonly Instruction[] s_ExampleData =
-        {
-            new("forward", 5),
-            new("down", 5),
-            new("forward", 8),
-            new("up", 3),
-            new("down", 8),
-            new("forward", 2)
-        };
-
-        [Test]
-        public void PartATest()
-        {
-            Assert.AreEqual(150, PositionTracker.CalculateSimple(s_ExampleData));
-        }
-
-        [Test]
-        public void PartBTest()
-        {
-            Assert.AreEqual(900, PositionTracker.CalculateWithAim(s_ExampleData));
-        }
+      Assert.AreEqual(150, PositionTracker.CalculateSimple(Data.Day02ExampleData));
     }
+
+    [Test]
+    public void PartBTest()
+    {
+      Assert.AreEqual(900, PositionTracker.CalculateWithAim(Data.Day02ExampleData));
+    }
+  }
 }

@@ -8,6 +8,16 @@ namespace AoC2021.Day02
 {
   public static class Data
   {
+    public static readonly Instruction[] Day02ExampleData =
+    {
+      new("forward", 5),
+      new("down", 5),
+      new("forward", 8),
+      new("up", 3),
+      new("down", 8),
+      new("forward", 2)
+    };
+
     public static readonly Instruction[] Day02Data =
     {
       new("forward", 3),

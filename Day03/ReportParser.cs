@@ -46,6 +46,8 @@ namespace AoC2021.Day03
         }
       }
 
+      // epsilon is the bitwise compliment of gamma, but gamma has a significant number of leading zeros
+      // that we don't care about, and the compliment of those must be ignored.
       int nEpsilon = ~nGamma & ((1 << nBits) - 1);
       return (int)(nGamma * nEpsilon);
     }
@@ -55,81 +57,60 @@ namespace AoC2021.Day03
       Debug.Assert(dataset != null);
       Debug.Assert(dataset.Any());
 
-      int n = 0;
+      int numBits = dataset[0].Length;
+
       var filteredSet = dataset;
-      while (!FilterO2(ref filteredSet, n++)) { }
+      for (int n = 0; n < numBits && filteredSet.Length > 1; n++)
+      {
+        int nRecords = filteredSet.Length;
+        int nBitsActive = 0;
+        int nThreshold = nRecords % 2 == 0 ? nRecords / 2 : (nRecords + 1) / 2;
+
+        foreach (var row in filteredSet)
+        {
+          if (row[n] == '1')
+            nBitsActive++;
+        }
+
+        if (nBitsActive >= nThreshold)
+        {
+          filteredSet = filteredSet.Where(r => r[n] == '1').ToArray();
+        }
+        else
+        {
+          filteredSet = filteredSet.Where(r => r[n] == '0').ToArray();
+        }
+      }
       Debug.Assert(filteredSet.Length == 1);
       int o2Rating = Convert.ToInt32(filteredSet[0], 2);
 
-      n = 0;
+
       filteredSet = dataset;
-      while (!FilterC02(ref filteredSet, n++)) { }
+      for (int n = 0; n < numBits && filteredSet.Length > 1; n++)
+      {
+        int nRecords = filteredSet.Length;
+        int nBitsActive = 0;
+        int nThreshold = nRecords % 2 == 0 ? nRecords / 2 : (nRecords + 1) / 2;
+
+        foreach (var row in filteredSet)
+        {
+          if (row[n] == '1')
+            nBitsActive++;
+        }
+
+        if (nBitsActive >= nThreshold)
+        {
+          filteredSet = filteredSet.Where(r => r[n] == '0').ToArray();
+        }
+        else
+        {
+          filteredSet = filteredSet.Where(r => r[n] == '1').ToArray();
+        }
+      }
       Debug.Assert(filteredSet.Length == 1);
       int co2Rating = Convert.ToInt32(filteredSet[0], 2);
 
       return o2Rating * co2Rating;
-    }
-
-    private static bool FilterO2(ref string[] dataset, int index)
-    {
-      Debug.Assert(dataset != null);
-      Debug.Assert(dataset.Length > 1);
-      Debug.Assert(dataset[0].Length > index);
-
-      int nCount = 0;
-      int nRows = dataset.Length;
-      int nThreshold = nRows / 2;
-
-      // summate the characters in the index column
-      foreach (var r in dataset)
-      {
-        if (r[index] == '1') nCount++;
-      }
-
-      // return only values from dataset that have the **MOST** common value in that column
-      if (nCount >= nThreshold)
-      {
-        // MCV is '1'
-        dataset = dataset.Where(r => r[index] == '1').ToArray();
-      }
-      else
-      {
-        // MCV is '0'
-        dataset = dataset.Where(r => r[index] == '0').ToArray();
-      }
-
-      return dataset.Length == 1;
-    }
-
-    private static bool FilterC02(ref string[] dataset, int index)
-    {
-      Debug.Assert(dataset != null);
-      Debug.Assert(dataset.Length > 1);
-      Debug.Assert(dataset[0].Length > index);
-
-      int nCount = 0;
-      int nRows = dataset.Length;
-      int nThreshold = nRows / 2;
-
-      // summate the characters in the index column
-      foreach (var r in dataset)
-      {
-        if (r[index] == '1') nCount++;
-      }
-
-      // return only values from dataset that have the **LEAST** common value in that column
-      if (nCount >= nThreshold)
-      {
-        // LCV is '0'
-        dataset = dataset.Where(r => r[index] == '0').ToArray();
-      }
-      else
-      {
-        // LCV is '1'
-        dataset = dataset.Where(r => r[index] == '1').ToArray();
-      }
-
-      return dataset.Length == 1;
     }
   }
 }
