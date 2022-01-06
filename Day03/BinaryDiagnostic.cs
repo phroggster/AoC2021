@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace AoC2021.Day03
 {
-  public static class ReportParser
+  public static class BinaryDiagnostic
   {
+    static void Main(string[] args)
+    {
+      Console.WriteLine($"Power usage:  {CalculatePowerConsumption(Data.Day03Data)}");
+      Console.WriteLine($"Life support: {CalculateLifeSupportRating(Data.Day03Data)}");
+    }
+
     public static int CalculatePowerConsumption(string[] dataset)
     {
       Debug.Assert(dataset != null);

@@ -7,88 +7,9 @@ using System.Threading.Tasks;
 
 namespace AoC2021.Day05
 {
-  [DebuggerDisplay("{DbgView,nq}")]
-  public readonly struct Point
+  public static class Data
   {
-    public readonly ushort x;
-    public readonly ushort y;
-
-    public Point(ushort xpos, ushort ypos)
-    {
-      x = xpos;
-      y = ypos;
-    }
-
-
-    /// <exception cref="OverflowException"/>
-    public static Point operator +(Point lhs, Point rhs)
-    {
-      int dx = lhs.x + rhs.x;
-      int dy = lhs.y + rhs.y;
-      if (dx > ushort.MaxValue || dx < 0 || dy > ushort.MaxValue || dy < 0)
-        throw new OverflowException();
-
-      return new Point((ushort)dx, (ushort)dy);
-    }
-
-    /// <exception cref="OverflowException"/>
-    public static Point operator -(Point lhs, Point rhs)
-    {
-      int dx = lhs.x - rhs.x;
-      int dy = lhs.y - rhs.y;
-      if (dx > ushort.MaxValue || dx < 0 || dy > ushort.MaxValue || dy < 0)
-        throw new OverflowException();
-
-      return new Point((ushort)dx, (ushort)dy);
-    }
-
-
-    internal string DbgView => $"{x},{y}";
-
-    public override string ToString()
-    {
-      return $"{x},{y}";
-    }
-  }
-
-  [DebuggerDisplay("{DbgView,nq}")]
-  public readonly struct Line
-  {
-    public readonly Point a;
-    public readonly Point b;
-
-    public Line(ushort x1, ushort y1, ushort x2, ushort y2)
-    {
-      a = new Point(x1, y1);
-      b = new Point(x2, y2);
-    }
-
-    public Line(Point pA, Point pB)
-    {
-      a = pA;
-      b = pB;
-    }
-
-
-    public ushort X1 => a.x;
-    public ushort Y1 => a.y;
-    public ushort X2 => b.x;
-    public ushort Y2 => b.y;
-
-    public bool IsHorizontal => a.y == b.y;
-    public bool IsVertical => a.x == b.x;
-
-    internal string DbgView => $"{a.DbgView} -> {b.DbgView}";
-
-    public ushort MaxX => Math.Max(a.x, b.x);
-    public ushort MaxY => Math.Max(a.y, b.y);
-    public ushort MinX => Math.Min(a.x, b.x);
-    public ushort MinY => Math.Min(a.y, b.y);
-  }
-
-  public class Data
-  {
-    public static readonly Line[] ExampleDataDay05 =
+    public static readonly Line[] Day05ExampleData =
     {
       new(0,9, 5,9),
       new(8,0, 0,8),
@@ -102,7 +23,7 @@ namespace AoC2021.Day05
       new(5,5, 8,2)
     };
 
-    public static readonly Line[] ActualDataDay05 =
+    public static readonly Line[] Day05Data =
     {
       new(556,286, 341,71),
       new(337,201, 782,646),

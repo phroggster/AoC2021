@@ -11,21 +11,7 @@ namespace AoC2021.Day04
   [DebuggerDisplay("{DbgDisplay,nq}")]
   public class Tile
   {
-    public bool Marked
-    {
-      get => _marked;
-      set
-      {
-        if (_marked != value)
-        {
-          _marked = value;
-          MarkedChanged?.Invoke(this, EventArgs.Empty);
-        }
-      }
-    }
-    public event EventHandler? MarkedChanged;
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private bool _marked = false;
+    public bool Marked { get; set; } = false;
 
     public int Value { get; init; }
 
@@ -35,24 +21,14 @@ namespace AoC2021.Day04
     }
 
 
-    private string DbgDisplay
-    {
-      get
-      {
-        return $"Tile {Value}: {(_marked ? "marked" : "not marked")}";
-      }
-    }
+    internal string DbgDisplay => $"Tile {Value}: {(Marked ? "marked" : "not marked")}";
   }
 
   public class Board
   {
     public Board(IEnumerable<int> values)
     {
-      _tiles = new ObservableCollection<Tile>(
-        values
-          .Select(n => new Tile(n))
-          .ToList()
-      );
+      _tiles = new List<Tile>(values.Select(n => new Tile(n)));
     }
 
     public Board(string values)
@@ -71,34 +47,20 @@ namespace AoC2021.Day04
             break;
         }
       }
-      _tiles = new ObservableCollection<Tile>(tls);
+      _tiles = new List<Tile>(tls);
     }
 
     public Board(params int[] values)
     {
-      _tiles = new ObservableCollection<Tile>(values.Select(n => new Tile(n)));
+      _tiles = new List<Tile>(values.Select(n => new Tile(n)));
     }
 
-    public event EventHandler? HasWon;
-    public bool IsWinner
-    {
-      get => _isWinner;
-      set
-      {
-        if (_isWinner != value)
-        {
-          _isWinner = value;
-          if (value)
-            HasWon?.Invoke(this, EventArgs.Empty);
-        }
-      }
-    }
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private bool _isWinner = false;
+
+    public bool IsWinner { get; set; } = false;
 
     public IReadOnlyList<Tile> Tiles => _tiles;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private ObservableCollection<Tile> _tiles;
+    private List<Tile> _tiles;
 
 
 

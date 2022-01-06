@@ -9,13 +9,13 @@ namespace AoC2021.Tests
     [Test]
     public void PartATest()
     {
-      Assert.AreEqual(150, PositionTracker.CalculateSimple(Data.Day02ExampleData));
+      Assert.AreEqual(150, DiveManager.CalculateSimple(Data.Day02ExampleData));
     }
 
     [Test]
     public void PartBTest()
     {
-      Assert.AreEqual(900, PositionTracker.CalculateWithAim(Data.Day02ExampleData));
+      Assert.AreEqual(900, DiveManager.CalculateWithAim(Data.Day02ExampleData));
     }
   }
 }

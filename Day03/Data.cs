@@ -8,7 +8,7 @@ namespace AoC2021.Day03
 {
   public static class Data
   {
-    public static readonly string[] Day3ExampleData =
+    public static readonly string[] Day03ExampleData =
     {
       "00100",
       "11110",
@@ -24,7 +24,7 @@ namespace AoC2021.Day03
       "01010",
     };
 
-    public static readonly string[] Day3Data =
+    public static readonly string[] Day03Data =
     {
       "011111111100",
       "100001011111",

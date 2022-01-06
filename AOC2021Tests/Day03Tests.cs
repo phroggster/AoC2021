@@ -9,13 +9,13 @@ namespace AoC2021.Tests
     [Test]
     public void PartATest()
     {
-      Assert.AreEqual(198, ReportParser.CalculatePowerConsumption(Data.Day3ExampleData));
+      Assert.AreEqual(198, BinaryDiagnostic.CalculatePowerConsumption(Data.Day03ExampleData));
     }
 
     [Test]
     public void PartBTest()
     {
-      Assert.AreEqual(230, ReportParser.CalculateLifeSupportRating(Data.Day3ExampleData));
+      Assert.AreEqual(230, BinaryDiagnostic.CalculateLifeSupportRating(Data.Day03ExampleData));
     }
   }
 }

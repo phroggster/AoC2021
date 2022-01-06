@@ -9,13 +9,13 @@ namespace AoC2021.Tests
     [Test]
     public void PartATest()
     {
-      Assert.AreEqual(5, HydrothermalVenture.CountOrientedOverlaps(Data.ExampleDataDay05));
+      Assert.AreEqual(5, HydrothermalVenture.CountOrientedOverlaps(Data.Day05ExampleData));
     }
 
     [Test]
     public void PartBTest()
     {
-      Assert.AreEqual(12, HydrothermalVenture.CountAllOverlaps(Data.ExampleDataDay05));
+      Assert.AreEqual(12, HydrothermalVenture.CountAllOverlaps(Data.Day05ExampleData));
     }
   }
 }

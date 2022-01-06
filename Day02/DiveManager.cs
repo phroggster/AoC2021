@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace AoC2021.Day02
 {
-  public static class PositionTracker
+  public static class DiveManager
   {
-    public static int CalculateSimple( IEnumerable<Instruction> instructions )
+    static void Main(string[] args)
+    {
+      Console.WriteLine($"Hpos * VPos simple: {CalculateSimple(Data.Day02Data)}");
+      Console.WriteLine($"Hpos * VPos aimed:  {CalculateWithAim(Data.Day02Data)}");
+    }
+
+    public static int CalculateSimple(IEnumerable<Instruction> instructions)
     {
       if (instructions is null || !instructions.Any()) throw new ArgumentException("Argument doesn't appear to be valid.", nameof(instructions));
 
@@ -37,7 +43,7 @@ namespace AoC2021.Day02
       return hpos * vpos;
     }
 
-    public static int CalculateWithAim( IEnumerable<Instruction> instructions )
+    public static int CalculateWithAim(IEnumerable<Instruction> instructions)
     {
       if (instructions is null || !instructions.Any()) throw new ArgumentException("Argument doesn't appear to be valid.", nameof(instructions));
 

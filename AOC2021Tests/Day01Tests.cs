@@ -9,13 +9,13 @@ namespace AoC2021.Tests
     [Test]
     public void DepthIncreasedCountTest()
     {
-      Assert.AreEqual(7, DepthTest.CalculateIncreases(Data.Day01ExampleData));
+      Assert.AreEqual(7, SonarSweeper.CalculateIncreases(Data.Day01ExampleData));
     }
 
     [Test]
     public void SlidingWindowCountTest()
     {
-      Assert.AreEqual(5, DepthTest.CalculateSlidingWindowIncreases(Data.Day01ExampleData));
+      Assert.AreEqual(5, SonarSweeper.CalculateSlidingWindowIncreases(Data.Day01ExampleData));
     }
   }
 }
