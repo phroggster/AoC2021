@@ -5,17 +5,7 @@ VisualStudioVersion = 16.0.31829.152
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day01", "Day01\Day01.csproj", "{80364AC5-C0C7-4046-87C2-12407B3614CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AoC2021Tests", "AOC2021Tests\AoC2021Tests.csproj", "{375EC499-9B4A-4FDC-A99B-30367F8E0226}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day02", "Day02\Day02.csproj", "{BF48ADEE-980B-4B50-B1D9-869B6DD0EAB9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B8B23CBB-3B74-4085-9691-493F030A54A3}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		.gitignore = .gitignore
-		LICENSE.md = LICENSE.md
-		ReadMe.md = ReadMe.md
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day03", "Day03\Day03.csproj", "{02EA4A2C-8199-4934-A554-3BF5513941C6}"
 EndProject
@@ -27,7 +17,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day06", "Day06\Day06.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day07", "Day07\Day07.csproj", "{B516A1D8-DA63-49E3-B78A-6E8180D7FA47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day08", "Day08\Day08.csproj", "{310F5913-9D21-4C18-B396-D92E72EED7E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day08", "Day08\Day08.csproj", "{310F5913-9D21-4C18-B396-D92E72EED7E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day09", "Day09\Day09.csproj", "{64FB718A-F76D-440D-9BBD-7A279B2736A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AoC2021Tests", "AOC2021Tests\AoC2021Tests.csproj", "{375EC499-9B4A-4FDC-A99B-30367F8E0226}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B8B23CBB-3B74-4085-9691-493F030A54A3}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		LICENSE.md = LICENSE.md
+		ReadMe.md = ReadMe.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +41,6 @@ Global
 		{80364AC5-C0C7-4046-87C2-12407B3614CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80364AC5-C0C7-4046-87C2-12407B3614CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80364AC5-C0C7-4046-87C2-12407B3614CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{375EC499-9B4A-4FDC-A99B-30367F8E0226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{375EC499-9B4A-4FDC-A99B-30367F8E0226}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{375EC499-9B4A-4FDC-A99B-30367F8E0226}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{375EC499-9B4A-4FDC-A99B-30367F8E0226}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BF48ADEE-980B-4B50-B1D9-869B6DD0EAB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BF48ADEE-980B-4B50-B1D9-869B6DD0EAB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF48ADEE-980B-4B50-B1D9-869B6DD0EAB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -71,6 +69,14 @@ Global
 		{310F5913-9D21-4C18-B396-D92E72EED7E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{310F5913-9D21-4C18-B396-D92E72EED7E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{310F5913-9D21-4C18-B396-D92E72EED7E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64FB718A-F76D-440D-9BBD-7A279B2736A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64FB718A-F76D-440D-9BBD-7A279B2736A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64FB718A-F76D-440D-9BBD-7A279B2736A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64FB718A-F76D-440D-9BBD-7A279B2736A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{375EC499-9B4A-4FDC-A99B-30367F8E0226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{375EC499-9B4A-4FDC-A99B-30367F8E0226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{375EC499-9B4A-4FDC-A99B-30367F8E0226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{375EC499-9B4A-4FDC-A99B-30367F8E0226}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
