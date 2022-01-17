@@ -1,3 +1,4 @@
+using AoC2021.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,7 +28,7 @@ namespace AoC2021.Day07
       // step 3: 3 units (3 units)
       // total:           3 units
 
-      var median = Extensions.RoundedMedian(crabPositions);
+      var median = crabPositions.RoundedMedian();
       int summation = 0;
 
       foreach (var hpos in crabPositions)
