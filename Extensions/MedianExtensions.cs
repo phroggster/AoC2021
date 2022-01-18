@@ -22,10 +22,14 @@ namespace AoC2021.Extensions
     /// <item>If the set has an even number of items (no direct "middle"
     /// value), return the mean of the two values surrounding the true middle
     /// of the sorted set.</item></list></para></remarks>
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="ArgumentException"/>
     public static double Median(this IEnumerable<int> sequence)
     {
-      if (sequence is null || !sequence.Any())
-        return double.NaN;
+      if (sequence is null)
+        throw new ArgumentNullException(nameof(sequence));
+      else if (!sequence.Any())
+        throw new ArgumentException("The sequence is empty.", nameof(sequence));
 
       var sorted = sequence.OrderBy(n => n);
       var nCount = sorted.Count();
