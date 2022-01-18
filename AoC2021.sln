@@ -27,12 +27,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day11", "Day11\Day11.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AoC2021Tests", "AOC2021Tests\AoC2021Tests.csproj", "{375EC499-9B4A-4FDC-A99B-30367F8E0226}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{D6B3BD7E-93B0-4D6C-A86E-021D5F6D9730}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extensions", "Extensions\Extensions.csproj", "{D6B3BD7E-93B0-4D6C-A86E-021D5F6D9730}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B8B23CBB-3B74-4085-9691-493F030A54A3}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		LICENSE.md = LICENSE.md
 		ReadMe.md = ReadMe.md
 	EndProjectSection
