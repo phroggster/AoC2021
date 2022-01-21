@@ -75,5 +75,30 @@ namespace AoC2021.Extensions
       }
       return result;
     }
+
+    /// <summary>Convert a row from a rectangular char array into a string.
+    /// </summary>
+    /// <param name="source">A rectangular array containing the chars of the
+    /// output string.</param>
+    /// <param name="rowIndex">The 0-based row index of the array to convert.
+    /// </param>
+    /// <returns>A string representation of the characters from the row of the
+    /// array.</returns>
+    public static string RowToString(this char[,] source, int rowIndex)
+    {
+      if (rowIndex >= source.GetLength(0))
+        throw new IndexOutOfRangeException(nameof(rowIndex));
+
+      var rowLen = source.GetLength(1);
+      var row = new char[rowLen];
+      // TODO: Buffer.BlockCopy(source, rowLen * rowIndex, row, 0, rowLen);
+      // But this seems to have problems?
+      for (int n = 0; n < rowLen; n++)
+      {
+        row[n] = source[rowIndex, n];
+      }
+
+      return new string(row);
+    }
   }
 }
