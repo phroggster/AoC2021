@@ -20,8 +20,11 @@ namespace AoC2021.Extensions
     /// <paramref name="source"/> array passes the test in the specified
     /// <paramref name="predicate"/>, or if the sequence is empty; otherwise,
     /// <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException"/>
     public static bool All<T>(this T[,] source, Func<T, bool> predicate)
     {
+      _ = source ?? throw new ArgumentNullException(nameof(source));
+      _ = predicate ?? throw new ArgumentNullException(nameof(predicate));
       foreach (var item in source)
       {
         if (predicate(item))
@@ -30,6 +33,14 @@ namespace AoC2021.Extensions
           return false;
       }
       return true;
+    }
+
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="OverflowException"/>
+    public static bool Any<T>(this T[,] source)
+    {
+      _ = source ?? throw new ArgumentNullException(nameof(source));
+      return source.Length > 0;
     }
 
     /// <summary>Determines whether any element of a rectangular array
@@ -44,8 +55,12 @@ namespace AoC2021.Extensions
     /// at least one of its elements passes the test in the specified
     /// <paramref name="predicate"/>; otherwise, <see langword="false"/>.
     /// </returns>
+    /// <exception cref="ArgumentNullException"/>
     public static bool Any<T>(this T[,] source, Func<T, bool> predicate)
     {
+      _ = source ?? throw new ArgumentNullException(nameof(source));
+      _ = predicate ?? throw new ArgumentNullException(nameof(predicate));
+
       foreach (var item in source)
       {
         if (predicate(item))
@@ -53,6 +68,14 @@ namespace AoC2021.Extensions
       }
 
       return false;
+    }
+
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="OverflowException"/>
+    public static int Count<T>(this T[,] source)
+    {
+      _ = source ?? throw new ArgumentNullException(nameof(source));
+      return source.Length;
     }
 
     /// <summary>Returns the number of elements in a rectangular array that
@@ -65,8 +88,15 @@ namespace AoC2021.Extensions
     /// condition.</param>
     /// <returns>The number of elements in the rectangular array that satisfy
     /// the condition in <paramref name="predicate"/>.</returns>
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="ArgumentException"/>
     public static int Count<T>(this T[,] source, Func<T, bool> predicate)
     {
+      _ = source ?? throw new ArgumentNullException(nameof(source));
+      _ = predicate ?? throw new ArgumentNullException(nameof(predicate));
+      if (!source.Any())
+        throw new ArgumentException(nameof(source));
+
       int result = 0;
       foreach (var item in source)
       {
@@ -84,16 +114,23 @@ namespace AoC2021.Extensions
     /// </param>
     /// <returns>A string representation of the characters from the row of the
     /// array.</returns>
+    /// <exception cref="ArgumentException"/>
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="IndexOutOfRangeException"/>
     public static string RowToString(this char[,] source, int rowIndex)
     {
-      if (rowIndex >= source.GetLength(0))
+      var nRows = source?.GetLength(0)
+        ?? throw new ArgumentNullException(nameof(source));
+      var nCols = source.GetLength(1);
+      if (nCols < 1 || nRows < 1)
+        throw new ArgumentException(nameof(source));
+      else if (rowIndex < 0 || rowIndex >= nRows)
         throw new IndexOutOfRangeException(nameof(rowIndex));
 
-      var rowLen = source.GetLength(1);
-      var row = new char[rowLen];
+      var row = new char[nCols];
       // TODO: Buffer.BlockCopy(source, rowLen * rowIndex, row, 0, rowLen);
       // But this seems to have problems?
-      for (int n = 0; n < rowLen; n++)
+      for (int n = 0; n < nCols; n++)
       {
         row[n] = source[rowIndex, n];
       }

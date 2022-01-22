@@ -28,30 +28,13 @@ namespace AoC2021.Day13
       return new Graph(data)
         .Fold(1)
         .Marks.Count();
-
-      var graph = new Graph(data);
-      Console.WriteLine($"Initial state ({graph.Width}x{graph.Height}):");
-      Console.WriteLine(graph.DebugDisplay);
-
-      var folded = graph.Fold(1);
-      Console.WriteLine($"{graph.Folds.First().DebugDisplay} ({folded.Width}x{folded.Height}): ");
-      Console.WriteLine(folded.DebugDisplay);
-
-      return folded.Marks.Count();
     }
 
     public static string PartTwo(string[] data)
     {
-      var graph = new Graph(data);
-      int nFolds = graph.Folds.Count();
-      var graphs = new List<Graph>(nFolds);
-
-      graphs.Add(graph);
-      for (int n = 0; n < nFolds; n++)
-      {
-        graphs.Add(graphs[n].Fold(1));
-      }
-      return graphs.Last().DebugDisplay;
+      return new Graph(data)
+        .Fold(int.MaxValue)
+        .DebugDisplay;
     }
   }
 

@@ -51,6 +51,8 @@ namespace AoC2021.Extensions
     /// calculate the median of.</param>
     /// <returns>The closest <see cref="int"/> value to the median of the
     /// values from the <paramref name="sequence"/>.</returns>
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="ArgumentException"/>
     public static int RoundedMedian(this IEnumerable<int> sequence)
     {
       return (int)Math.Floor(Median(sequence) + 0.5d);

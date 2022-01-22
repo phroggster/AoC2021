@@ -22,18 +22,24 @@ namespace AoC2021.Tests
     [Test]
     public void TestOrigamiPart2()
     {
-      Assert.AreEqual(foldedStrings[2], TransparentOrigami.PartTwo(Data.Day13ExampleData));
+      Assert.AreEqual(FoldedThrice, TransparentOrigami.PartTwo(Data.Day13ExampleData));
     }
 
-    [TestCaseSource(nameof(GraphTestData))]
+    [Test,
+      TestCaseSource(nameof(GraphTestData))]
     public void TestDebuggingOutput(string expectedResult, int nFolds, IEnumerable<string> dataSet)
     {
       Assert.AreEqual(expectedResult, new Graph(dataSet).Fold(nFolds).DebugDisplay);
     }
 
-    static readonly string[] foldedStrings = new[]
+    static readonly object[] GraphTestData = new[]
     {
-      @"...#..#..#.
+      new object[] { FoldedOnce, 0, Data.Day13ExampleData },
+      new object[] { FoldedTwice, 1, Data.Day13ExampleData },
+      new object[] { FoldedThrice, 2, Data.Day13ExampleData },
+    };
+
+    const string FoldedOnce = @"...#..#..#.
 ....#......
 ...........
 #..........
@@ -48,30 +54,24 @@ namespace AoC2021.Tests
 ......#...#
 #..........
 #.#........
-",
-      @"#.##..#..#.
+";
+
+    const string FoldedTwice = @"#.##..#..#.
 #...#......
 ......#...#
 #...#......
 .#.#..#.###
 ...........
 ...........
-",
-      @"#####
+";
+
+    const string FoldedThrice = @"#####
 #...#
 #...#
 #...#
 #####
 .....
 .....
-"
-    };
-
-    static readonly object[] GraphTestData = new[]
-    {
-      new object[] { foldedStrings[0], 0, Data.Day13ExampleData },
-      new object[] { foldedStrings[1], 1, Data.Day13ExampleData },
-      new object[] { foldedStrings[2], 2, Data.Day13ExampleData },
-    };
+";
   }
 }
