@@ -95,7 +95,7 @@ namespace AoC2021.Extensions
       _ = source ?? throw new ArgumentNullException(nameof(source));
       _ = predicate ?? throw new ArgumentNullException(nameof(predicate));
       if (!source.Any())
-        throw new ArgumentException(nameof(source));
+        throw new ArgumentException($"The {nameof(source)} parameter seems empty", nameof(source));
 
       int result = 0;
       foreach (var item in source)
@@ -123,7 +123,7 @@ namespace AoC2021.Extensions
         ?? throw new ArgumentNullException(nameof(source));
       var nCols = source.GetLength(1);
       if (nCols < 1 || nRows < 1)
-        throw new ArgumentException(nameof(source));
+        throw new ArgumentException($"The {nameof(source)} parameter seems empty", nameof(source));
       else if (rowIndex < 0 || rowIndex >= nRows)
         throw new IndexOutOfRangeException(nameof(rowIndex));
 
