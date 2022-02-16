@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace AoC2021.Tests.Extensions
 {
   [TestFixture,
@@ -15,43 +14,53 @@ namespace AoC2021.Tests.Extensions
     DefaultFloatingPointTolerance(double.Epsilon * 100.0d)]
   public class MedianExtTests
   {
-    [TestCaseSource(nameof(TestCases))]
-    public void TestMedianExtension(double expectedResult, IEnumerable<int> values)
+    [Test,
+      TestCase(91.0d, new[] { 83, 91, 94, 89, 89, 96, 91, 92, 90 }),
+      TestCase(86.0d, new[] { 91, 90, 81, 83, 84, 83, 88, 91, 89, 84 }),
+      TestCase(95.0d, new[] { 101, 100, 91, 93, 96, 95, 94 }),
+      TestCase(80.5d, new[] { 78, 82, 81, 77, 79, 81, 80, 81 }),
+      TestOf(nameof(MedianExtensions.Median))]
+    public void TestMedianExtension(double expectedResult, int[] values)
     {
-      Assert.Throws<ArgumentNullException>(() => MedianExtensions.Median((IEnumerable<int>)null));
-      Assert.Throws<ArgumentException>(() => MedianExtensions.Median(Enumerable.Empty<int>()));
-
       Assert.AreEqual(expectedResult, MedianExtensions.Median(values));
     }
 
-    static readonly object[] TestCases =
+    [Test,
+      TestOf(nameof(MedianExtensions.Median))]
+    public void TestMedianExtExceptions()
     {
-        new object[] { 91.0d, new[] { 83, 91, 94, 89, 89, 96, 91, 92, 90 } },
-        new object[] { 86.0d, new[] { 91, 90, 81, 83, 84, 83, 88, 91, 89, 84 } },
-        new object[] { 95.0d, new[] { 101, 100, 91, 93, 96, 95, 94 } },
-        new object[] { 80.5d, new[] { 78, 82, 81, 77, 79, 81, 80, 81 } }
-      };
+      Assert.Multiple(() =>
+      {
+        Assert.Throws<ArgumentNullException>(() => MedianExtensions.Median(null as IEnumerable<int>));
+        Assert.Throws<ArgumentException>(() => MedianExtensions.Median(Enumerable.Empty<int>()));
+      });
+    }
   }
 
   [TestFixture,
- TestOf(typeof(MedianExtensions))]
+    TestOf(typeof(MedianExtensions))]
   public class RoundedMedianExtTests
   {
-    [TestCaseSource(nameof(TestCases))]
-    public void TestRoundedMedianExtension(int expectedResult, IEnumerable<int> values)
+    [Test,
+      TestCase(91, new[] { 83, 91, 94, 89, 89, 96, 91, 92, 90 }),
+      TestCase(86, new[] { 91, 90, 81, 83, 84, 83, 88, 91, 89, 84 }),
+      TestCase(95, new[] { 101, 100, 91, 93, 96, 95, 94 }),
+      TestCase(81, new[] { 78, 82, 81, 77, 79, 81, 80, 81 }),
+      TestOf(nameof(MedianExtensions.RoundedMedian))]
+    public void TestRoundedMedianExtension(int expectedResult, int[] values)
     {
-      Assert.Throws<ArgumentNullException>(() => MedianExtensions.Median((IEnumerable<int>)null));
-      Assert.Throws<ArgumentException>(() => MedianExtensions.Median(Enumerable.Empty<int>()));
-
       Assert.AreEqual(expectedResult, MedianExtensions.RoundedMedian(values));
     }
 
-    static readonly object[] TestCases =
+    [Test,
+      TestOf(nameof(MedianExtensions.RoundedMedian))]
+    public void TestRoundedMedianExtExceptions()
     {
-        new object[] { 91, new[] { 83, 91, 94, 89, 89, 96, 91, 92, 90 } },
-        new object[] { 86, new[] { 91, 90, 81, 83, 84, 83, 88, 91, 89, 84 } },
-        new object[] { 95, new[] { 101, 100, 91, 93, 96, 95, 94 } },
-        new object[] { 81, new[] { 78, 82, 81, 77, 79, 81, 80, 81 } }
-      };
+      Assert.Multiple(() =>
+      {
+        Assert.Throws<ArgumentNullException>(() => MedianExtensions.RoundedMedian(null as IEnumerable<int>));
+        Assert.Throws<ArgumentException>(() => MedianExtensions.RoundedMedian(Enumerable.Empty<int>()));
+      });
+    }
   }
 }
