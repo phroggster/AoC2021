@@ -80,7 +80,7 @@ namespace AoC2021.Day14
         elemCounts[c]++;
 
       var rxCounter = new ReactionCounter(Elements);
-      foreach (var bond in Template.SlidingPairs())
+      foreach (var bond in Template.SlidingWindowPairs())
         rxCounter[bond]++;
 
       for (int n = 0; n < nCycles; n++)
