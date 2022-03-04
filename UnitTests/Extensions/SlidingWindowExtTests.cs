@@ -17,17 +17,17 @@ namespace AoC2021.Tests.Extensions
     [Test,
       TestCaseSource(nameof(IntPairCases)),
       TestOf(nameof(SlidingWindowExtensions.SlidingWindowPairs))]
-    public void TestSlidingWindowPairsExtInt((int, int)[] expected, int[] testData)
+    public void TestSlidingWindowPairsExtInt(IEnumerable<WindowPair<int>> expected, int[] testData)
     {
-      Utility.SequenceEquals(expected, testData.SlidingWindowPairs());
+      Assert.That(testData.SlidingWindowPairs(), Is.EqualTo(expected.Select(exp => (exp.x, exp.y))));
     }
 
     [Test,
       TestCaseSource(nameof(CharPairCases)),
       TestOf(nameof(SlidingWindowExtensions.SlidingWindowPairs))]
-    public void TestSlidingWindowPairsExtChar((char, char)[] expected, char[] testData)
+    public void TestSlidingWindowPairsExtChar(IEnumerable<WindowPair<char>> expected, char[] testData)
     {
-      Utility.SequenceEquals(expected, testData.SlidingWindowPairs());
+      Assert.That(testData.SlidingWindowPairs(), Is.EqualTo(expected.Select(exp => (exp.x, exp.y))));
     }
 
     [Test,
@@ -52,17 +52,17 @@ namespace AoC2021.Tests.Extensions
     [Test,
       TestCaseSource(nameof(IntSetCases)),
       TestOf(nameof(SlidingWindowExtensions.SlidingWindowSets))]
-    public void TestSlidingWindowSetsExtInt((int, int)[] expected, int[] testData)
+    public void TestSlidingWindowSetsExtInt(IEnumerable<WindowPair<int>> expected, int[] testData)
     {
-      Utility.SequenceEquals(expected, testData.SlidingWindowSets());
+      Assert.That(testData.SlidingWindowSets(), Is.EqualTo(expected.Select(exp => (exp.x, exp.y))));
     }
 
     [Test,
       TestCaseSource(nameof(CharSetCases)),
       TestOf(nameof(SlidingWindowExtensions.SlidingWindowSets))]
-    public void TestSlidingWindowSetsExtChar((char, char)[] expected, char[] testData)
+    public void TestSlidingWindowSetsExtChar(IEnumerable<WindowPair<char>> expected, char[] testData)
     {
-      Utility.SequenceEquals(expected, testData.SlidingWindowSets());
+      Assert.That(testData.SlidingWindowSets(), Is.EqualTo(expected.Select(exp => (exp.x, exp.y))));
     }
 
     [Test,
@@ -87,21 +87,21 @@ namespace AoC2021.Tests.Extensions
     [Test,
       TestCaseSource(nameof(IntSetCases)),
       TestOf(nameof(SlidingWindowExtensions.ReverseSlidingWindowSets))]
-    public void TestReverseSlidingWindowSetsExtInt((int, int)[] expected, int[] testData)
+    public void TestReverseSlidingWindowSetsExtInt(IEnumerable<WindowPair<int>> expectedSequence, int[] testData)
     {
       // uses the same test data as TestSlidingWindowSetsExtInt
-      Utility.SequenceEquals(expected.Reverse(),
-        testData.ReverseSlidingWindowSets());
+      Assert.That(testData.ReverseSlidingWindowSets(),
+        Is.EqualTo(expectedSequence.Select(exp => (exp.x, exp.y)).Reverse()));
     }
 
     [Test,
       TestCaseSource(nameof(CharSetCases)),
       TestOf(nameof(SlidingWindowExtensions.ReverseSlidingWindowSets))]
-    public void TestReverseSlidingWindowSetsExtInt((char, char)[] expected, char[] testData)
+    public void TestReverseSlidingWindowSetsExtInt(IEnumerable<WindowPair<char>> expectedSequence, char[] testData)
     {
       // uses the same test data as TestSlidingWindowSetsExtChar
-      Utility.SequenceEquals(expected.Reverse(),
-        testData.ReverseSlidingWindowSets());
+      Assert.That(testData.ReverseSlidingWindowSets(),
+        Is.EqualTo(expectedSequence.Select(exp => (exp.x, exp.y)).Reverse()));
     }
 
     [Test,
@@ -125,11 +125,11 @@ namespace AoC2021.Tests.Extensions
     static readonly object[] IntPairCases = new object[]
     {
       new object[] {
-        new [] { (1,2), (2,3), (3,4), (4,5), (5,6) },
+        new WindowPair<int>[] { new(1,2), new(2,3), new(3,4), new(4,5), new(5,6) },
         new [] { 1, 2, 3, 4, 5, 6 }
       },
       new object[] {
-        new [] { (6,4), (4,2), (2,1), (1,3), (3,5) },
+        new WindowPair<int> [] { new(6,4), new(4,2), new(2,1), new(1,3), new(3,5) },
         new [] { 6, 4, 2, 1, 3, 5 }
       },
     };
@@ -137,11 +137,11 @@ namespace AoC2021.Tests.Extensions
     static readonly object[] CharPairCases = new object[]
     {
       new object[] {
-        new [] { ('a','b'), ('b','C'), ('C','d'), ('d','e'), ('e','f') },
+        new WindowPair<char>[] { new('a','b'), new('b','C'), new('C','d'), new('d','e'), new('e','f') },
         new [] { 'a', 'b', 'C', 'd', 'e', 'f' }
       },
       new object[] {
-        new [] { ('F','D'), ('D','B'), ('B','A'), ('A','c'), ('c','e') },
+        new WindowPair<char>[] { new('F','D'), new('D','B'), new('B','A'), new('A','c'), new('c','e') },
         new [] { 'F', 'D', 'B', 'A', 'c', 'e' }
       }
     };
@@ -149,11 +149,11 @@ namespace AoC2021.Tests.Extensions
     static readonly object[] IntSetCases = new object[]
     {
       new object[] {
-        new[] { (1,2), (3,4), (5,6) },
+        new WindowPair<int>[] { new(1,2), new(3,4), new(5,6) },
         new[] { 1, 2, 3, 4, 5, 6 }
       },
       new object[] {
-        new [] { (6, 4), (2, 1), (3, 5) },
+        new WindowPair<int>[] { new(6, 4), new(2, 1), new(3, 5) },
         new [] { 6, 4, 2, 1, 3, 5 }
       }
     };
@@ -161,13 +161,28 @@ namespace AoC2021.Tests.Extensions
     static readonly object[] CharSetCases = new object[]
     {
       new object[] {
-          new [] { ('a','b'), ('C','d'), ('e','f') },
+          new WindowPair<char>[] { new('a','b'), new('C','d'), new('e','f') },
           new [] { 'a', 'b', 'C', 'd', 'e', 'f' }
         },
       new object[] {
-        new [] { ('F','D'), ('B','A'), ('c','e') },
+        new WindowPair<char>[] { new('F','D'), new('B','A'), new('c','e') },
         new [] { 'F', 'D', 'B', 'A', 'c', 'e' }
       },
     };
+
+
+    // Something about nunit/runner/visual studio isn't happy with anonymous types for
+    // parameters like: (int x, int y) so this is a silly wrapper for testing.
+    public readonly struct WindowPair<T>
+    {
+      public readonly T x;
+      public readonly T y;
+
+      public WindowPair(T x, T y)
+      {
+        this.x = x;
+        this.y = y;
+      }
+    }
   }
 }

@@ -2,7 +2,7 @@ using AoC2021.Day02;
 using NUnit.Framework;
 using System;
 
-namespace AoC2021.Tests
+namespace AoC2021.Tests.Day02
 {
   public class Day02Tests
   {

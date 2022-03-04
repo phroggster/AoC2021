@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AoC2021.Tests
+namespace AoC2021.Tests.Day15
 {
   [TestFixture]
   public class Day15Tests

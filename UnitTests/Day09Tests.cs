@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace AoC2021.Tests
+namespace AoC2021.Tests.Day09
 {
   [TestFixture]
   public class Day09Tests
