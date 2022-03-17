@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GlmSharp;
 
 namespace AoC2021.Day19
 {
@@ -36,7 +37,6 @@ namespace AoC2021.Day19
     {
       var nScanners = serializedScanners.Count(scn => scn.StartsWith("--- scanner "));
       var scanners = new List<Scanner>(nScanners);
-      var iv3ec = new ivec3EqualityComparer();
 
       for (int n = 0, nlen = serializedScanners.Count(); n < nlen; n++)
       {
@@ -53,8 +53,8 @@ namespace AoC2021.Day19
       }
 
       // This capacity will likely be slightly large, but that's better than undersize.
-      _beaconLocs = new(Environment.ProcessorCount, scanners.Select(s => s.Count - 12).Append(12).Sum(), iv3ec);
-      _scannerLocs = new(Environment.ProcessorCount, scanners.Count, iv3ec);
+      _beaconLocs = new(Environment.ProcessorCount, scanners.Select(s => s.Count - 12).Append(12).Sum());
+      _scannerLocs = new(Environment.ProcessorCount, scanners.Count);
 
       // Add all solved scanners to the HashSets.
       foreach (var preSolved in scanners.Where(s => s.IsSolved))
@@ -103,13 +103,10 @@ namespace AoC2021.Day19
       {
         foreach (var rhs in _scannerLocs)
         {
-          if (!iv3ec.Equals(lhs, rhs))
+          if (lhs != rhs)
           {
             // |x₁-x₂|+|y₁-y₂|+|z₁-z₂| -- https://en.wikipedia.org/wiki/Taxicab_geometry
-            MaxScannerDistance = Math.Max(MaxScannerDistance,
-              Math.Abs(lhs.x - rhs.x) +
-              Math.Abs(lhs.y - rhs.y) +
-              Math.Abs(lhs.z - rhs.z));
+            MaxScannerDistance = Math.Max(MaxScannerDistance, ivec3.Abs(lhs - rhs).Sum);
           }
         }
       }

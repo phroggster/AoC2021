@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,6 +7,10 @@
     <RootNamespace>AoC2021.Day19</RootNamespace>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GlmSharpStd" Version="0.9.8" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Extensions\Extensions.csproj" />

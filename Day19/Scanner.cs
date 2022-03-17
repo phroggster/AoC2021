@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using GlmSharp;
 
 namespace AoC2021.Day19
 {
@@ -155,34 +156,34 @@ namespace AoC2021.Day19
     static ivec3 LocalToWorld(ivec3 beacon, ivec3 scannerPosition, EOrientation scannerOrientation)
       => scannerOrientation switch
       {
-        EOrientation.Default => ivec3.FusedMultiplyAdd(beacon.xyz, new ivec3(1, 1, 1), scannerPosition),
+        EOrientation.Default => ivec3.Fma(beacon.xyz, new ivec3(1, 1, 1), scannerPosition),
 
-        EOrientation.RightUpIn => ivec3.FusedMultiplyAdd(beacon.xyz, new ivec3(1, 1, 1), scannerPosition),
-        EOrientation.RightDownOut => ivec3.FusedMultiplyAdd(beacon.xyz, new ivec3(1, -1, -1), scannerPosition),
-        EOrientation.LeftUpOut => ivec3.FusedMultiplyAdd(beacon.xyz, new ivec3(-1, +1, -1), scannerPosition),
-        EOrientation.LeftDownIn => ivec3.FusedMultiplyAdd(beacon.xyz, new ivec3(-1, -1, 1), scannerPosition),
-        EOrientation.RightOutUp => ivec3.FusedMultiplyAdd(beacon.xzy, new ivec3(1, 1, -1), scannerPosition),
-        EOrientation.RightInDown => ivec3.FusedMultiplyAdd(beacon.xzy, new ivec3(1, -1, 1), scannerPosition),
-        EOrientation.LeftInUp => ivec3.FusedMultiplyAdd(beacon.xzy, new ivec3(-1, 1, 1), scannerPosition),
-        EOrientation.LeftOutDown => ivec3.FusedMultiplyAdd(beacon.xzy, new ivec3(-1, -1, -1), scannerPosition),
+        EOrientation.RightUpIn => ivec3.Fma(beacon, new ivec3(1, 1, 1), scannerPosition),
+        EOrientation.RightDownOut => ivec3.Fma(beacon, new ivec3(1, -1, -1), scannerPosition),
+        EOrientation.LeftUpOut => ivec3.Fma(beacon, new ivec3(-1, +1, -1), scannerPosition),
+        EOrientation.LeftDownIn => ivec3.Fma(beacon, new ivec3(-1, -1, 1), scannerPosition),
+        EOrientation.RightOutUp => ivec3.Fma(beacon.swizzle.xzy, new ivec3(1, 1, -1), scannerPosition),
+        EOrientation.RightInDown => ivec3.Fma(beacon.swizzle.xzy, new ivec3(1, -1, 1), scannerPosition),
+        EOrientation.LeftInUp => ivec3.Fma(beacon.swizzle.xzy, new ivec3(-1, 1, 1), scannerPosition),
+        EOrientation.LeftOutDown => ivec3.Fma(beacon.swizzle.xzy, new ivec3(-1, -1, -1), scannerPosition),
 
-        EOrientation.UpInRight => ivec3.FusedMultiplyAdd(beacon.zxy, new ivec3(1, 1, 1), scannerPosition),
-        EOrientation.DownOutRight => ivec3.FusedMultiplyAdd(beacon.zxy, new ivec3(1, -1, -1), scannerPosition),
-        EOrientation.UpOutLeft => ivec3.FusedMultiplyAdd(beacon.zxy, new ivec3(-1, 1, -1), scannerPosition),
-        EOrientation.DownInLeft => ivec3.FusedMultiplyAdd(beacon.zxy, new ivec3(-1, -1, 1), scannerPosition),
-        EOrientation.UpRightOut => ivec3.FusedMultiplyAdd(beacon.yxz, new ivec3(1, 1, -1), scannerPosition),
-        EOrientation.DownRightIn => ivec3.FusedMultiplyAdd(beacon.yxz, new ivec3(1, -1, 1), scannerPosition),
-        EOrientation.UpLeftIn => ivec3.FusedMultiplyAdd(beacon.yxz, new ivec3(-1, 1, 1), scannerPosition),
-        EOrientation.DownLeftOut => ivec3.FusedMultiplyAdd(beacon.yxz, new ivec3(-1, -1, -1), scannerPosition),
+        EOrientation.UpInRight => ivec3.Fma(beacon.swizzle.zxy, new ivec3(1, 1, 1), scannerPosition),
+        EOrientation.DownOutRight => ivec3.Fma(beacon.swizzle.zxy, new ivec3(1, -1, -1), scannerPosition),
+        EOrientation.UpOutLeft => ivec3.Fma(beacon.swizzle.zxy, new ivec3(-1, 1, -1), scannerPosition),
+        EOrientation.DownInLeft => ivec3.Fma(beacon.swizzle.zxy, new ivec3(-1, -1, 1), scannerPosition),
+        EOrientation.UpRightOut => ivec3.Fma(beacon.swizzle.yxz, new ivec3(1, 1, -1), scannerPosition),
+        EOrientation.DownRightIn => ivec3.Fma(beacon.swizzle.yxz, new ivec3(1, -1, 1), scannerPosition),
+        EOrientation.UpLeftIn => ivec3.Fma(beacon.swizzle.yxz, new ivec3(-1, 1, 1), scannerPosition),
+        EOrientation.DownLeftOut => ivec3.Fma(beacon.swizzle.yxz, new ivec3(-1, -1, -1), scannerPosition),
 
-        EOrientation.InRightUp => ivec3.FusedMultiplyAdd(beacon.yzx, new ivec3(1, 1, 1), scannerPosition),
-        EOrientation.OutRightDown => ivec3.FusedMultiplyAdd(beacon.yzx, new ivec3(1, -1, -1), scannerPosition),
-        EOrientation.OutLeftUp => ivec3.FusedMultiplyAdd(beacon.yzx, new ivec3(-1, 1, -1), scannerPosition),
-        EOrientation.InLeftDown => ivec3.FusedMultiplyAdd(beacon.yzx, new ivec3(-1, -1, 1), scannerPosition),
-        EOrientation.OutUpRight => ivec3.FusedMultiplyAdd(beacon.zyx, new ivec3(1, 1, -1), scannerPosition),
-        EOrientation.InDownRight => ivec3.FusedMultiplyAdd(beacon.zyx, new ivec3(1, -1, 1), scannerPosition),
-        EOrientation.InUpLeft => ivec3.FusedMultiplyAdd(beacon.zyx, new ivec3(-1, 1, 1), scannerPosition),
-        EOrientation.OutDownLeft => ivec3.FusedMultiplyAdd(beacon.zyx, new ivec3(-1, -1, -1), scannerPosition),
+        EOrientation.InRightUp => ivec3.Fma(beacon.swizzle.yzx, new ivec3(1, 1, 1), scannerPosition),
+        EOrientation.OutRightDown => ivec3.Fma(beacon.swizzle.yzx, new ivec3(1, -1, -1), scannerPosition),
+        EOrientation.OutLeftUp => ivec3.Fma(beacon.swizzle.yzx, new ivec3(-1, 1, -1), scannerPosition),
+        EOrientation.InLeftDown => ivec3.Fma(beacon.swizzle.yzx, new ivec3(-1, -1, 1), scannerPosition),
+        EOrientation.OutUpRight => ivec3.Fma(beacon.swizzle.zyx, new ivec3(1, 1, -1), scannerPosition),
+        EOrientation.InDownRight => ivec3.Fma(beacon.swizzle.zyx, new ivec3(1, -1, 1), scannerPosition),
+        EOrientation.InUpLeft => ivec3.Fma(beacon.swizzle.zyx, new ivec3(-1, 1, 1), scannerPosition),
+        EOrientation.OutDownLeft => ivec3.Fma(beacon.swizzle.zyx, new ivec3(-1, -1, -1), scannerPosition),
 
         _ => throw new ArgumentOutOfRangeException(nameof(scannerOrientation)),
       };
